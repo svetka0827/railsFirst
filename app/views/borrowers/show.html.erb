@@ -1,0 +1,40 @@
+<head>
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(odd) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+	<h3><a href="/loggout">Log Out</a></h3>
+	<p>Name:<%= @borrower.first_name%> <%= @borrower.last_name%></p>
+	<p>Amount Need:$<%= @borrower.money %></p>
+	<p>Amount Raised:$<%= @totalRaised.raisedd %></p><br>
+
+	<p>List of people who lend you money:</p>
+	<table>
+	  <tr>
+	    <th>Name</th>
+	    <th>Email</th>
+	    <th>Amount Lent</th>
+	  </tr>
+ <% @lenders.each do |lender| %>
+	  <tr>
+	    <td><%= lender.first_name %> <%= lender.last_name %></td>
+	    <td><%= lender.email %></td>
+	    <td>$<%= lender.raisedd %></td>
+	  </tr>
+  <% end %>
+
+	</table>

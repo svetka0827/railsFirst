@@ -1,0 +1,84 @@
+<head>
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(odd) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+	<h3><a href="/loggoutL">Log Out</a></h3>
+	<p>Name:<%= @lender.first_name%> <%= @lender.last_name%></p>
+	<p>Account Balance:$<%= @lender.money %></p><br>
+
+	<p>List of people in need of help:</p>
+	<table>
+	  <tr>
+	    <th>Name</th>
+	    <th>Need Money for</th>
+	    <th>Reason for Loan</th>
+	    <th>Amount Needed</th>
+	    <th>Amount Raised</th>
+	    <th>Action </th>
+	  </tr>
+ <% @borrowers.each do |borrower| %>
+	  <tr>
+	    <td><%= borrower.first_name %> <%= borrower.last_name %></td>
+	    <td><%= borrower.purpose %></td>
+	    <td><%= borrower.description %></td>
+	    <td>$<%= borrower.money %></td>
+	    <td>$<%= borrower.raised %></td>
+	    <td>
+	    	<form action="/lend/<%=borrower.id %>" method='post'>
+	    		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	    		<select name=money[amount]>
+	    			<option>20</option>
+	    			<option>50</option>
+	    		</select>
+	    		<button>Lend</button>
+	    	</form>
+
+	    </td>
+	  </tr>
+  <% end %>
+
+	</table>
+
+	<p>List of people you lend money to:</p>
+
+	<table>
+	  <tr>
+	    <th>Name</th>
+	    <th>Need Money for</th>
+	    <th>Reason for Loan</th>
+	    <th>Amount Needed</th>
+	    <th>Amount Raised</th>
+	    <th>Amount Lent </th>
+	  </tr>
+
+ <% @borrowers2.each do |borrower2| %>
+	  <tr>
+	    <td><%= borrower2.first_name %> <%= borrower2.last_name %></td>
+	    <td><%= borrower2.purpose %></td>
+	    <td><%= borrower2.description %></td>
+	    <td>$<%= borrower2.money %></td>
+	    <td>$<%= borrower2.raised %></td>
+	    <td>$<%= borrower2.raisedd %></td>
+	
+	  </tr>
+
+  <% end %>
+
+	</table>
+
+</body>
